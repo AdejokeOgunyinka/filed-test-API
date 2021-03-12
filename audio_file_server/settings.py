@@ -30,7 +30,6 @@ DEBUG = config('DEBUG')
 
 ALLOWED_HOSTS = ['localhost','https://audio-file-server.herokuapp.com/']
 
-
 # Application definition
 
 INSTALLED_APPS = [
