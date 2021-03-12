@@ -10,23 +10,13 @@ jobs:
       matrix:
         python-version: [3.8]
 
-    services:
-      postgres:
-        image: postgres:11@sha256:85d79cba2d4942dad7c99f84ec389a5b9cc84fb07a3dcd3aff0fb06948cdc03b
-        ports:
-          - '5432:5432'
-        env:
-          POSTGRES_DB: ${{secrets.DB_NAME}}
-          POSTGRES_USER: ${{secrets.DB_USER}}
-          POSTGRES_HOST: ${{secrets.DB_HOST}}
-          POSTGRES_PASSWORD: ${{secrets.DB_PASSWORD}}
-
     steps:
     - uses: actions/checkout@v2
     - name: Set up Python ${{ matrix.python-version }}
       uses: actions/setup-python@v2
       with:
         python-version: ${{ matrix.python-version }}
+
     - name: psycopg2 prerequisites
       run: sudo apt-get install python-dev libpq-dev
 
@@ -35,6 +25,10 @@ jobs:
         python -m pip install --upgrade pip
         pip install flake8 pytest
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+
+    - uses: harmon758/postgresql-action@v1
+      with:
+        postgresql version: '11'
 
     - name: Lint with flake8
       run: |
