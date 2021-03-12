@@ -47,7 +47,6 @@ jobs:
     - name: Run migrations
       env: 
         SECRET_KEY: ${{secrets.SECRET_KEY}}
-        DATABASE_URL: ${{secrets.DATABASE_URL}}
         DEBUG: ${{secrets.DEBUG}}
       run: |
         python manage.py migrate
@@ -55,7 +54,6 @@ jobs:
     - name: Run test
       env: 
         SECRET_KEY: ${{secrets.SECRET_KEY}}
-        DATABASE_URL: ${{secrets.DATABASE_URL}}
         DEBUG: ${{secrets.DEBUG}}
       run: |
         python manage.py test
