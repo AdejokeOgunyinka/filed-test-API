@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost','https://audio-file-server.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost','audio-file-server.herokuapp.com/']
 
 # Application definition
 
