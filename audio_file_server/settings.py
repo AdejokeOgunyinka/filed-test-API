@@ -29,7 +29,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG')
 
-ALLOWED_HOSTS = ['localhost','audio-file-server.herokuapp.com/']
+ALLOWED_HOSTS = ['localhost','audio-file-server.herokuapp.com']
 
 # Application definition
 
@@ -138,4 +138,4 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Activate Django-Heroku.
-# django_heroku.settings(locals())
+django_heroku.settings(locals())
