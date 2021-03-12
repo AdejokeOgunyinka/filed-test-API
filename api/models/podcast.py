@@ -7,7 +7,7 @@ class Podcast(models.Model):
     duration = models.IntegerField(min_value=1)
     upload_time = models.DateTimeField(auto_now_add=True)
     host = models.CharField(max_length=100)
-    participants = ArrayField(ArrayField(models.CharField(max_length=100)))
+    participants = ArrayField(models.CharField(max_length=100))
 
     def __str__(self):
         return self.name
