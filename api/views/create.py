@@ -4,18 +4,25 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.response import Response
 from ..helpers import is_file_type_correct, choose_serializer
 from ..models import Song, Audiobook, Podcast
+from ..serializers import SongSerializer, AudiobookSerializer, PodcastSerializer
 
 
 class CreateView(CreateAPIView):
     def post(self, request):
-        file_type = str(request.META.get('audioFileType', None)).capitalize()
-        file_id = request.META.get('audioFileId', None)
+        file_type = request.data.get('audioFileType', None)
+        print(file_type)
+
+        file_metadata = request.data.get('audioFileMetadata', '')
+        # print(file_metadata)
 
         is_file_type_accepted = is_file_type_correct(file_type)
+        # print(is_file_type_accepted)
+
         serializer_type = choose_serializer(file_type)
+        print(serializer_type)
 
         if is_file_type_accepted:
-            serialized_data = serializer_type(data=request.data)
+            serialized_data = serializer_type(data=file_metadata)
 
             if serialized_data.is_valid():
                 serialized_data.save()
