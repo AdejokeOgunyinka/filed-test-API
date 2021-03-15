@@ -9,17 +9,12 @@ from ..serializers import SongSerializer, AudiobookSerializer, PodcastSerializer
 
 class CreateView(CreateAPIView):
     def post(self, request):
-        file_type = request.data.get('audioFileType', None)
-        print(file_type)
-
+        file_type = request.data.get('audioFileType', None).capitalize()
+        
         file_metadata = request.data.get('audioFileMetadata', '')
-        # print(file_metadata)
 
         is_file_type_accepted = is_file_type_correct(file_type)
-        # print(is_file_type_accepted)
-
         serializer_type = choose_serializer(file_type)
-        print(serializer_type)
 
         if is_file_type_accepted:
             serialized_data = serializer_type(data=file_metadata)
@@ -30,7 +25,7 @@ class CreateView(CreateAPIView):
                     {
                         'message': f' New {file_type} has been successfully saved',
                         'payload': request.data
-                    }, status=status.HTTP_201_CREATED
+                    }, status=status.HTTP_200_OK
                 )
             else:
                 return Response(

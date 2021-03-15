@@ -1,16 +1,10 @@
 from ..serializers import AudiobookSerializer, PodcastSerializer, SongSerializer
+# from ..import serializers
 
 
 def choose_serializer(file_type):
-    string_serializers = ['AudiobookSerializer', 'PodcastSerializer', 'SongSerializer']
-    all_serializers = [AudiobookSerializer, PodcastSerializer, SongSerializer]
+    all_serializers = {"AudiobookSerializer": AudiobookSerializer, "PodcastSerializer": PodcastSerializer, "SongSerializer": SongSerializer}
 
-    for serializer in string_serializers:
+    for serializer in all_serializers.keys():
         if serializer.startswith(file_type):
-            # print(serializer)
-            for real_serializer in all_serializers:
-                if serializer == str(real_serializer):
-                    # print(real_serializer)
-                    return real_serializer
-        else:
-            return None
+            return all_serializers[serializer]

@@ -2,22 +2,23 @@ from django.shortcuts import render
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.generics import DestroyAPIView
-from ..helpers import is_file_type_correct, choose_serializer
+from ..helpers import is_file_type_correct, choose_serializer, get_model
 from ..models import Song, Audiobook, Podcast
 
 
 class DeleteView(DestroyAPIView):
-    def delete(self, request):
-        file_type = str(request.META.get('audioFileType', None)).capitalize()
-        file_id = request.META.get('audioFileId', None)
+    def delete(self, request, audioFileType, audioFileID):
+        file_type = audioFileType.capitalize()
+        file_id = audioFileID
 
         is_file_type_accepted = is_file_type_correct(file_type)
         serializer_type = choose_serializer(file_type)
+        model = get_model(file_type)
 
         if is_file_type_accepted:
-            audio_file_instance = file_type.objects.get(id=file_id)
+            try: 
+                audio_file_instance = model.objects.get(id=file_id)
 
-            if audio_file_instance:
                 audio_file_instance.delete()
                 return Response(
                     {
@@ -25,10 +26,10 @@ class DeleteView(DestroyAPIView):
                     }, status=status.HTTP_200_OK
                 )
 
-            else:
+            except:
                 return Response(
                     {
-                        'message': f'This {file_type} with id {file_id} does not exist'
+                        'message': f'The {file_type} with id {file_id} does not exist'
                     }, status=status.HTTP_400_BAD_REQUEST
                 )
 
