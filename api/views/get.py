@@ -22,7 +22,6 @@ class GetView(ListAPIView):
                 return Response(
                     {
                         'message': f'{file_type} with id {file_id} was not found',
-                        'payload': query.data
                     }, status=status.HTTP_400_BAD_REQUEST
                 )
             
