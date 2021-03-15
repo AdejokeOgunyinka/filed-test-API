@@ -43,13 +43,13 @@ The API Endpoints implemented are:
     "/create" 
 
 - Delete API:
-    “/delete/<audioFileType>/<audioFileID>” e.g. "delete/Song/1"
+    /delete/<audioFileType>/<audioFileID> e.g. "delete/Song/1"
 
 - Update API:
-    “/update/<audioFileType>/<audioFileID>” e.g. "update/Podcast/2"
+    /update/<audioFileType>/<audioFileID> e.g. "update/Podcast/2"
 
 - Get API:
-    “/<audioFileType>/<audioFileID>” e.g. "get/Song/1"
+    /<audioFileType>/<audioFileID> e.g. "get/Song/1"
 
 - GetAll API:
-    “/<audioFileType>” e.g "get/Audiobook"
+    /<audioFileType> e.g "get/Audiobook/1"
