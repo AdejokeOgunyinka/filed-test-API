@@ -1,6 +1,9 @@
 This Audio File API is a Django Rest Framework API that simulates the behavior of an audio file server
 while using Postgres as the Database.
 
+Postman Documentation: https://documenter.getpostman.com/view/13135631/Tz5qbdK6
+Heroku link: https://audio-file-server.herokuapp.com/ 
+
 The audio files can be of 3 types, with structures as shown below:
 – Song
 – Podcast
